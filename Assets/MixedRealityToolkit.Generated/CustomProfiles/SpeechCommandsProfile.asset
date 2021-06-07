@@ -17,77 +17,105 @@ MonoBehaviour:
   recognitionConfidenceLevel: 1
   speechCommands:
   - localizationKey: 
-    keyword: Menu
-    keyCode: 51
-    action:
-      id: 2
-      description: Menu
-      axisConstraint: 2
-  - localizationKey: 
-    keyword: Select
-    keyCode: 49
-    action:
-      id: 1
-      description: Select
-      axisConstraint: 2
-  - localizationKey: 
-    keyword: Toggle Diagnostics
-    keyCode: 48
-    action:
-      id: 14
-      description: Toggle Diagnostics
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Toggle Profiler
-    keyCode: 57
-    action:
-      id: 15
-      description: Toggle Profiler
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Make Planes
-    keyCode: 52
-    action:
-      id: 0
-      description: None
-      axisConstraint: 0
-  - localizationKey: 
     keyword: "\u5730\u56F3\u3092\u8868\u793A"
-    keyCode: 0
+    keyCode: 282
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
     keyword: "\u5730\u56F3\u3092\u9589\u3058\u308B"
-    keyCode: 0
+    keyCode: 283
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
     keyword: "\u30D0\u30C3\u30C1\u6570\u30C1\u30A7\u30C3\u30AF"
-    keyCode: 0
+    keyCode: 104
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
     keyword: "\u30D4\u30C3\u30AD\u30F3\u30B0\u958B\u59CB"
-    keyCode: 0
+    keyCode: 106
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
     keyword: "\u30D4\u30C3\u30AD\u30F3\u30B0\u7D42\u4E86"
-    keyCode: 0
+    keyCode: 107
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
     keyword: "\u30B7\u30B9\u30C6\u30E0\u7D42\u4E86"
+    keyCode: 108
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u30B7\u30B9\u30C6\u30E0\u958B\u59CB"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u30A2\u30D7\u30EA\u30B1\u30FC\u30B7\u30E7\u30F3\u7D42\u4E86"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u8868\u793A\u6D88\u53BB"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u8868\u793A\u30AF\u30EA\u30A2"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u4F5C\u696D\u958B\u59CB"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u4F5C\u696D\u7D42\u4E86"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u30D0\u30C3\u30C1\u6570\u78BA\u8A8D"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u901A\u4FE1\u958B\u59CB"
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: "\u901A\u4FE1\u5207\u65AD"
     keyCode: 0
     action:
       id: 0
