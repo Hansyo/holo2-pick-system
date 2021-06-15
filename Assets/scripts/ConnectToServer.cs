@@ -19,8 +19,9 @@ public class ConnectToServer : MonoBehaviour
 {
 #if WINDOWS_UWP
     private MessageWebSocket websocket;
-    private string ipaddr = "192.168.11.4";
 #endif
+    public string ipaddr = "192.168.11.4";
+    public string port   = "10090";
     public TextMeshProUGUI recvText;
 
     // Start is called before the first frame update
@@ -54,7 +55,7 @@ public class ConnectToServer : MonoBehaviour
         try {
             Task.Run(async () =>
             {
-                await websocket.ConnectAsync(new Uri("ws://" + ipaddr + ":10090/w"));
+                await websocket.ConnectAsync(new Uri("ws://" + ipaddr + ":" + port + "/w"));
                 await WebSocket_SendMessage("echo: Holo:Connect");
             });
         } catch (Exception e)
