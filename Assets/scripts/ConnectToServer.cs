@@ -20,6 +20,7 @@ public class ConnectToServer : MonoBehaviour
 #if WINDOWS_UWP
     private MessageWebSocket websocket;
 #endif
+    public uint user_id = 0;
     public string ipaddr = "192.168.11.4";
     public string port   = "10090";
     public TextMeshProUGUI recvText;
@@ -56,7 +57,7 @@ public class ConnectToServer : MonoBehaviour
             Task.Run(async () =>
             {
                 await websocket.ConnectAsync(new Uri("ws://" + ipaddr + ":" + port + "/w"));
-                await WebSocket_SendMessage("echo: Holo:Connect");
+                await WebSocket_SendMessage(user_id.ToString());
             });
         } catch (Exception e)
         {
@@ -166,7 +167,7 @@ public class ConnectToServer : MonoBehaviour
 #else
     public void OnConnect()
     {
-        this.recvText.SetText("Start Connection");
+        this.recvText.SetText("Start Connection " + user_id.ToString());
     }
     public void CloseConnection()
     {
