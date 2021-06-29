@@ -22,20 +22,56 @@ public class ConnectToServer : MonoBehaviour
 #endif
     public uint user_id = 0;
     public string ipaddr = "192.168.11.4";
-    public string port   = "10090";
+    public string port = "10090";
     public TextMeshProUGUI recvText;
+    public GameObject audioController;
+    private AudioController acScript;
+    private HumanState humanState = null;
+    private string preMessage = "";
 
     // Start is called before the first frame update
     void Start()
     {
         // アプリケーション起動時に必ずサーバーとの接続処理を入れる
         OnConnect();
+        // audioControllerのスクリプトを取得し、音声再生を可能にする。
+        acScript = audioController.GetComponent<AudioController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    private void ParseMessage(string jsonString)
+    {
+        // JsonUtility.FromJson<クラス名>(string); でstringをクラス名にパースできる
+        this.humanState = JsonUtility.FromJson<HumanState>(jsonString);
+        if (humanState.message != "" && humanState.message != preMessage)
+        {
+            // 前回のメッセージと違っていたら読み上げと表示を行う。
+            this.acScript.SynthesizeAudio(humanState.message);
+            this.preMessage = humanState.message; // 同じメッセージが何度も表示されるのを防ぐ
+            RecvMessage(this.preMessage);
+        }
+    }
+
+    // バッチ確認の時に音声を流すための関数
+    public void CheckBatch(AudioClip clip)
+    {
+        if (this.humanState == null) return;
+        if (this.humanState.currenttask == "")
+        {
+            // 何もないことを示すメッセージ(clip)を送信
+            this.acScript.playWav(clip);
+        }
+        else
+        {
+            // 現在のタスクをacScriptを使って音声合成する。
+            this.acScript.SynthesizeAudio(this.humanState.currenttask);
+            RecvMessage("現在のタスク: " + this.humanState.currenttask);
+        }
     }
 
 #if WINDOWS_UWP
@@ -123,10 +159,13 @@ public class ConnectToServer : MonoBehaviour
                 dataReader.UnicodeEncoding = UnicodeEncoding.Utf8;
                 string message = dataReader.ReadString(dataReader.UnconsumedBufferLength);
 
-                // 表示データを更新
-                Debug.Log("Received: " + message);
-                RecvMessage(message);
+                ParseMessage(message);
 
+                // 表示データを更新
+                //Debug.Log("Received: " + message);
+                //RecvMessage(message);
+
+                /*
                 Task.Run(async () =>
                 {
                     // serverにログを残す
@@ -134,6 +173,7 @@ public class ConnectToServer : MonoBehaviour
                     // Do Something; ex) Debug.Log();
                     //Task.Delay(100);
                 });
+                */
             }
         }
         catch (Exception e)
@@ -148,7 +188,7 @@ public class ConnectToServer : MonoBehaviour
     {
         Debug.Log("WebSocket_Closed; Code: " + args.Code + ", Reason: \"" + args.Reason + "\"");
     }
-
+    
     // サーバーとの接続を切る。これをやらないと、毎回不正に切られてしまう。それはよくない
     public void CloseConnection()
     {
@@ -177,15 +217,38 @@ public class ConnectToServer : MonoBehaviour
     {
         this.recvText.SetText("send ->" + s);
     }
+    private void RecvMessage(string s)
+    {
+        this.recvText.SetText(s);
+    }
     public void ClearText()
     {
         this.recvText.SetText("");
     }
-
     public void FinishApplication()
     {
         this.recvText.SetText("Finish Application.");
         Application.Quit();
     }
 #endif
+}
+
+/* json用のシリアライズクラス */
+[System.Serializable]
+public class HumanState
+{
+    public string currenttask;
+    public string nextposition;
+    public string workingtime;
+    public string movedistance;
+    public string message;
+    public Position currentpostion;
+    public Position targetposition;
+}
+
+[System.Serializable]
+public class Position
+{
+    public float x;
+    public float y;
 }

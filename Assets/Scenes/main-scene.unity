@@ -571,6 +571,7 @@ MonoBehaviour:
   ipaddr: 192.168.11.4
   port: 10090
   recvText: {fileID: 1638615767}
+  audioController: {fileID: 884578796}
 --- !u!4 &510842151
 Transform:
   m_ObjectHideFlags: 0
@@ -824,6 +825,7 @@ GameObject:
   - component: {fileID: 639137038}
   - component: {fileID: 639137037}
   - component: {fileID: 639137036}
+  - component: {fileID: 639137035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -845,6 +847,29 @@ Transform:
   m_Father: {fileID: 287240607}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &639137035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639137033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf98dd1206224111a38765365e98e207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockCursorWhenFocusLocked: 1
+  setCursorInvisibleWhenFocusLocked: 0
+  maxGazeCollisionDistance: 10
+  raycastLayerMasks:
+  - serializedVersion: 2
+    m_Bits: 4294967291
+  stabilizer:
+    storedStabilitySamples: 60
+  gazeTransform: {fileID: 0}
+  minHeadVelocityThreshold: 0.5
+  maxHeadVelocityThreshold: 2
 --- !u!114 &639137036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1106,18 @@ MonoBehaviour:
             m_StringArgument: send:Batch
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 510842150}
+          m_MethodName: CheckBatch
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 4f376827d1d7777499123095a81bfeba,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - keyword: "\u30D4\u30C3\u30AD\u30F3\u30B0\u958B\u59CB"
     response:
       m_PersistentCalls:
@@ -1303,6 +1340,18 @@ MonoBehaviour:
             m_StringArgument: send:Batch
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 510842150}
+          m_MethodName: CheckBatch
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 4f376827d1d7777499123095a81bfeba,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - keyword: "\u901A\u4FE1\u958B\u59CB"
     response:
       m_PersistentCalls:
@@ -1515,7 +1564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SubscKey: 
-  Region: 
+  Region: japaneast
   audioSource: {fileID: 884578798}
   Language: ja-JP
   Speaker: ja-JP-HarukaRUS

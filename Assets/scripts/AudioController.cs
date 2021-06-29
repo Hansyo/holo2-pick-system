@@ -29,6 +29,7 @@ public class AudioController : MonoBehaviour
         this.config.SpeechSynthesisLanguage = Language; // 日本語にする
         this.config.SpeechSynthesisVoiceName = Speaker; //読み上げ音声の設定
         this.synthesizer = new SpeechSynthesizer(this.config, null);
+        //Task.Run(async () => { await SynthesizeAudioAsync(); });
     }
 
     // Update is called once per frame
@@ -94,9 +95,21 @@ public class AudioController : MonoBehaviour
     // 固定音声の生成に使用。後のために残しておく
     async Task SynthesizeAudioAsync()
     {
-        using var audioConfig = AudioConfig.FromWavFileOutput("path/to/write/file.wav");
-        using var synthesizer = new SpeechSynthesizer(config, audioConfig);
-        await synthesizer.SpeakTextAsync("A simple test to write to a file.");
+        using (var audioConfig = AudioConfig.FromWavFileOutput("file-name.wav"))
+        {
+            config = SpeechConfig.FromSubscription("Key", "Region");
+            //config.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Raw16Khz16BitMonoPcm);
+            config.SpeechSynthesisLanguage = Language; // 日本語にする
+            config.SpeechSynthesisVoiceName = Speaker; //読み上げ音声の設定
+
+            //var audioConfig = AudioConfig.FromWavFileOutput("noBatch.wav");
+            using (var synthesizer = new SpeechSynthesizer(config, audioConfig))
+            {
+                //var synthesizer = new SpeechSynthesizer(this.config, audioConfig);
+                await synthesizer.SpeakTextAsync("読み上げテキスト");
+                Debug.Log("確認用のログ");
+            }
+        }
     }
     */
 }
