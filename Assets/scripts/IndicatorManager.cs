@@ -21,14 +21,13 @@ public class IndicatorManager : MonoBehaviour
 
     void Update()
     {
-        // ShowIndicator(showIndicator);
         if (showIndicator)
         {
             DirectionUpdate();
         }
     }
 
-    public void SetIndicator()
+    public void ToggleIndicator()
     {
         showIndicator = !showIndicator;
         if (showIndicator)
@@ -39,10 +38,10 @@ public class IndicatorManager : MonoBehaviour
         {
             Debug.Log("Indicator OFF");
         }
-        ShowIndicator(showIndicator);
+        SetIndicator();
     }
 
-    private void ShowIndicator(bool showIndicator)
+    private void SetIndicator()
     {
         if (targetObject == null)
         {

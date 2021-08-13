@@ -22,7 +22,6 @@ public class TargetMoveManager : MonoBehaviour
     }
 
     IEnumerator FuncCoroutine() {
-        int i = 0;
         while(true){
             TargetPositionUpdate();
             yield return new WaitForSeconds(timeOut);
@@ -31,17 +30,11 @@ public class TargetMoveManager : MonoBehaviour
 
     public void TargetPositionUpdate()
     {
-        if (i < targetPosition.Length)
-        {
-            this.gameObject.transform.position = targetPosition[i];
-            i++;
-        }
-        else
+        if (i >= targetPosition.Length)
         {
             i = 0;
-            this.gameObject.transform.position = targetPosition[i];
-            i++;
         }
-
+        this.gameObject.transform.position = targetPosition[i];
+        i++;
     }
 }
